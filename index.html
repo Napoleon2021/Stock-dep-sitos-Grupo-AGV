@@ -16,7 +16,7 @@
 <title>Stock & Reposición · Grupo AGV</title>
 <script>try{var __t=localStorage.getItem('wnmTheme')||'dark';document.documentElement.setAttribute('data-theme',__t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
@@ -551,6 +551,149 @@
   ::-webkit-scrollbar-track{background:#050505;}
   *{scrollbar-width:auto; scrollbar-color:rgba(255,255,255,0.55) #050505;}
 
+  /* =====================================================================================
+     ESTILO UNIFICADO WNM REPORTES (igual a "Control del Sistema de Gestión" y "Control de Combustible")
+     Solo piel: colores, tipografías, tarjetas, pestañas y botones. No toca lógica ni logos.
+     Va ANTES del bloque responsive para que los ajustes de celular/tablet sigan ganando.
+     ===================================================================================== */
+  :root{
+    --bg:#0a0f1a; --bg2:#0d1524; --panel:#111b2e; --panel-2:#0f1829;
+    --ink:#e8eef8; --ink-muted:#8fa3bf; --line:#22304a; --line2:#2b3d5c;
+    --navy:#0d1524; --navy2:#0f1829;
+    --accent:#f59e0b; --accent2:#fbbf24; --teal:#2dd4bf;
+    --alert:#ef5350; --alert-bg:rgba(239,83,80,0.14);
+    --ok:#34d399; --ok-bg:rgba(52,211,153,0.14);
+    --info:#2dd4bf; --info-bg:rgba(45,212,191,0.14);
+    --gold:#eab308; --gold-bg:rgba(234,179,8,0.14);
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+    --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  }
+  :root[data-theme="light"]{
+    --bg:#f1f5fa; --bg2:#ffffff; --panel:#ffffff; --panel-2:#f6f9fd;
+    --ink:#0f1b2e; --ink-muted:#51637f; --line:#d6e0ee; --line2:#c3d0e4;
+    --accent:#d97706; --accent2:#f59e0b; --teal:#0d9488;
+    --alert:#dc2626; --alert-bg:rgba(220,38,38,0.10);
+    --ok:#059669; --ok-bg:rgba(5,150,105,0.12);
+    --info:#0d9488; --info-bg:rgba(13,148,136,0.12);
+    --gold:#b45309; --gold-bg:rgba(180,83,9,0.12);
+    --shadow:0 4px 16px rgba(20,40,80,.10);
+  }
+  html,body{background:var(--bg);background-attachment:scroll;}
+  :root[data-theme="light"] body{background:var(--bg);}
+
+  /* Cabecera: plana como en Gestión (logo y cubo no se tocan) */
+  header.topbar{background:var(--bg2);border-bottom:1px solid var(--line);box-shadow:none;}
+  header.topbar::before{opacity:.18;}
+  .brand-word span{color:#FF7A50;text-shadow:0 0 14px rgba(255,122,80,.5);}
+  #loginGate .login-logo .lg-word span{color:#FF7A50;}
+  header.topbar .title-block h1{font-size:34px;letter-spacing:.2px;text-shadow:none;color:var(--ink);}
+  header.topbar .title-block h1 .h1-acc{color:var(--accent);}
+  header.topbar .title-block p{color:var(--ink-muted);}
+  :root[data-theme="light"] header.topbar{background:#0d1524;}
+  :root[data-theme="light"] header.topbar .title-block h1{color:#e8eef8;}
+  :root[data-theme="light"] header.topbar .title-block h1 .h1-acc{color:#f59e0b;}
+  :root[data-theme="light"] header.topbar .title-block p{color:#8fa3bf;}
+
+  /* Botones: pastillas de 10px, principal ámbar translúcido */
+  .btn,.file-slot,.theme-toggle-btn,.voice-btn,.voice-mute-btn{border-radius:10px;}
+  .file-slot{background:var(--panel-2);border:1px solid var(--line2);}
+  button.file-slot:hover{background:var(--panel);border-color:var(--accent);}
+  .btn{background:var(--panel-2);border:1px solid var(--line2);}
+  .btn:hover{border-color:var(--accent);color:var(--ink);}
+  .btn.primary,.metric-toggle button.active,.bc-chip.bc-current,.view-toggle button.active,
+  .voice-card .vc-confirm,#loginGate button.login-submit{
+    background:rgba(245,158,11,.14);color:var(--accent);border:1px solid var(--accent);font-weight:700;
+  }
+  .btn.primary:hover,#loginGate button.login-submit:hover,.voice-card .vc-confirm:hover{background:rgba(245,158,11,.24);filter:none;}
+  :root[data-theme="light"] .metric-toggle button.active,
+  :root[data-theme="light"] .view-toggle button.active{color:var(--accent);}
+  #loginGate button.login-submit{border-radius:10px;padding:11px;}
+  .voice-card .vc-btns button{border-radius:10px;}
+
+  /* Filtros */
+  .filterbar{background:var(--bg2);}
+  .filter-field select,.filter-field input,.multiselect-btn,.search-input,#loginGate input,
+  .col-filter-popup .cfp-search,.pagination-bar select{border-radius:9px;border-color:var(--line2);background:var(--panel-2);}
+  .multiselect-panel,.col-filter-popup{border-radius:12px;border-color:var(--line2);}
+  .filter-field select:focus,.filter-field input:focus,.search-input:focus,#loginGate input:focus{outline:none;border-color:var(--accent);}
+
+  /* Pestañas: chips redondeados, activa en ámbar */
+  nav.tabs{background:transparent;border-bottom:none;gap:8px;padding:14px 28px 6px;}
+  nav.tabs button{
+    border:1px solid var(--line2);border-radius:999px;background:var(--panel-2);
+    padding:8px 16px;font-size:13px;font-weight:600;color:var(--ink-muted);
+  }
+  nav.tabs button:hover{border-color:var(--accent);color:var(--ink);}
+  nav.tabs button.active,:root[data-theme="light"] nav.tabs button.active{
+    background:rgba(245,158,11,.14);border-color:var(--accent);color:var(--accent);font-weight:700;text-shadow:none;
+  }
+
+  /* Tarjetas KPI: separadas, redondeadas, borde superior de color; números en Barlow Condensed */
+  .kpi-row{gap:12px;background:transparent;border-bottom:none;padding:16px 28px 4px;}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:14px;box-shadow:var(--shadow);}
+  .kpi:hover{background:var(--panel-2);border-color:var(--line2);border-top-color:var(--accent);}
+  .kpi:active{background:var(--panel-2);}
+  .kpi .kpi-label{letter-spacing:.8px;font-weight:700;}
+  .kpi .kpi-value{font-family:'Barlow Condensed',system-ui,sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,34px);}
+  .kpi.flag-alert{border-top-color:var(--alert);}
+  .kpi.flag-ok{border-top-color:var(--ok);}
+  .kpi.flag-gold{border-top-color:var(--gold);}
+  .kpi.flag-alert .kpi-value,.kpi.flag-ok .kpi-value,.kpi.flag-gold .kpi-value{text-shadow:none;}
+  :root[data-theme="light"] .kpi:hover,:root[data-theme="light"] .kpi:active{background:var(--panel-2);}
+
+  /* Paneles y KPIs locales */
+  main{padding-top:14px;}
+  .panel{border-radius:14px;box-shadow:var(--shadow);}
+  .panel-head h2{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:.2px;}
+  .local-kpi{border-radius:12px;background:var(--panel-2);}
+  .local-kpi .lk-label{letter-spacing:.7px;font-weight:700;}
+  .local-kpi .lk-value{font-weight:700;}
+  .local-kpi:hover,.local-kpi.clickable:hover{background:var(--panel);}
+  .local-kpi.clickable.active{background:rgba(245,158,11,.10);}
+  :root[data-theme="light"] .local-kpi:hover,:root[data-theme="light"] .local-kpi.clickable:hover{background:#fff;}
+  :root[data-theme="light"] .local-kpi.clickable.active{background:rgba(217,119,6,.10);}
+  .matrix-cell{border-radius:10px;}
+
+  /* Tablas */
+  table.data-table thead th{background:var(--panel-2);letter-spacing:.6px;font-weight:700;}
+  table.data-table tbody tr:hover{background:rgba(245,158,11,.06);}
+  table.data-table td.num{font-family:var(--mono);font-size:12px;}
+  :root[data-theme="light"] table.data-table thead th{background:var(--panel-2);}
+  .table-scroll{border-radius:12px;border-color:var(--line);}
+  .pill.alerta{color:#fff;}
+
+  /* Gráficos: resaltados en ámbar en vez de celeste */
+  .bar-row-active,.bar-col-active{background:rgba(245,158,11,.12);}
+  :root[data-theme="light"] .bar-row-active,:root[data-theme="light"] .bar-col-active{background:rgba(217,119,6,.10);}
+  .donut-legend .dl-row.active{background:rgba(245,158,11,.14);}
+  :root[data-theme="light"] .donut-legend .dl-row.active{background:rgba(217,119,6,.12);}
+  .donut-ring{filter:drop-shadow(0 0 14px rgba(245,158,11,.10));}
+  .donut-ring:hover{filter:drop-shadow(0 0 20px rgba(245,158,11,.20));}
+  .bc-chip{border-radius:999px;}
+  .bc-chip:hover{background:rgba(245,158,11,.20);}
+  tr.clickable-row:hover{background:rgba(245,158,11,.07);}
+  tr.clickable-row.row-selected{background:rgba(245,158,11,.14);}
+  #btnExitFullscreenFloating{background:var(--panel);border-color:var(--line2);}
+  #btnExitFullscreenFloating:hover,.voice-btn:hover,.voice-mute-btn:hover{background:var(--panel-2);border-color:var(--accent);}
+
+  /* Pantalla de acceso: mismos colores de fondo, tarjeta y campos; el logo queda igual */
+  #loginGate{background:radial-gradient(900px 500px at 20% 10%,rgba(245,158,11,0.07),transparent 60%),
+    radial-gradient(800px 460px at 100% 100%,rgba(45,212,191,0.06),transparent 55%),var(--bg);}
+  :root[data-theme="light"] #loginGate{background:rgba(241,245,250,0.96);}
+  #loginGate .login-card{border-radius:14px;background:var(--panel);border-color:var(--line2);}
+  #loginGate h2{color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-size:24px;}
+
+  /* Barras de scroll: se mantienen anchas y visibles (pedido previo), con pista del color nuevo */
+  ::-webkit-scrollbar-track{background:var(--bg2);}
+  *{scrollbar-color:rgba(255,255,255,0.55) #0d1524;}
+  :root[data-theme="light"] ::-webkit-scrollbar-track{background:#e9eff7;}
+  :root[data-theme="light"] *{scrollbar-color:#b7c4d8 #e9eff7;}
+  :root[data-theme="light"] ::-webkit-scrollbar-thumb{background:#b7c4d8;}
+
+  /* La cabecera es oscura en ambos temas: sus controles no deben volverse claros en tema claro */
+  header.topbar .file-slot,header.topbar .voice-btn,header.topbar .voice-mute-btn{background:#0f1829;border:1px solid #2b3d5c;color:#CFE0EC;}
+  header.topbar button.file-slot:hover{background:#111b2e;border-color:#f59e0b;}
+
   /* ---- Responsive: celular / tablet chica ---- */
   @media (max-width: 700px){
     header.topbar{padding:14px 14px;gap:10px;}
@@ -631,7 +774,7 @@
     </div>
     <div class="title-block">
       <div class="brand-word">WNM <span>REPORTES</span></div>
-      <h1>Stock, Movimientos y Reposición</h1>
+      <h1>Stock, Movimientos y <span class="h1-acc">Reposición</span></h1>
       <p>Grupo AGV · cruce de movimientos (MVH) y stock por depósito (MVK)</p>
     </div>
     <div class="wnm-cube-wrap" aria-hidden="true">
@@ -4962,7 +5105,7 @@ document.addEventListener('click', function(e){
   renderTab(tab);
 });
 
-const DONUT_PALETTE = ['#38BDF8','#FF7A50','#FBBF24','#34D399','#A78BFA','#F472B6','#22D3EE','#FACC15','#8CA3BE'];
+const DONUT_PALETTE = ['#F59E0B','#2DD4BF','#8B7CF6','#34D399','#EF5350','#EAB308','#38BDF8','#F472B6','#7B8AA3'];
 /* Al clickear una barra o un sector de dona (fuera del modal de pantalla completa),
    además de aplicar el filtro llevamos la vista hasta la tabla de detalle de esa
    misma solapa, para que el resultado del click sea visible de una. */
