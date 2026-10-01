@@ -694,6 +694,61 @@
   header.topbar .file-slot,header.topbar .voice-btn,header.topbar .voice-mute-btn{background:#0f1829;border:1px solid #2b3d5c;color:#CFE0EC;}
   header.topbar button.file-slot:hover{background:#111b2e;border-color:#f59e0b;}
 
+  /* ---- Fase 2 estilo unificado: detalle/tablas, botones de exportar, controles de gráfico, chips ---- */
+  :root{--th-bg:#142036;--td-text:#aebbd0;--pill-tx:#052029;}
+  :root[data-theme="light"]{--th-bg:#eef3fa;--td-text:var(--ink);}
+
+  /* Tablas de detalle: encabezado en banda, filas más aireadas, texto tenue y números en mono brillante */
+  table.data-table{font-size:13px;}
+  table.data-table thead th{background:var(--th-bg);padding:12px 14px;letter-spacing:.8px;font-size:11px;border-bottom:1px solid var(--line2);}
+  :root[data-theme="light"] table.data-table thead th{background:var(--th-bg);}
+  table.data-table thead th .sort-arrow{color:var(--accent);opacity:.9;}
+  table.data-table tbody td{padding:11px 14px;color:var(--td-text);border-bottom:1px solid rgba(255,255,255,0.05);}
+  :root[data-theme="light"] table.data-table tbody td{border-bottom:1px solid var(--line);}
+  table.data-table td.num{color:var(--ink);font-weight:600;}
+  .table-scroll{background:var(--panel);}
+  .panel-head .desc{font-size:12.5px;}
+
+  /* Etiquetas (EGRESO / INGRESO / alta-media-baja): píldora en mayúsculas */
+  .pill{padding:3px 11px;border-radius:999px;text-transform:uppercase;letter-spacing:.6px;font-size:10.5px;font-weight:800;}
+  .pill.alerta{background:var(--alert);color:#fff;}
+
+  /* Botones de exportar: PDF en rojo, Excel/CSV en ámbar, con ícono (igual que Combustible) */
+  .btn[data-exp]{border-radius:10px;font-weight:700;padding:7px 14px;}
+  .btn[data-exp^="excel"],.btn[data-exp^="csv"]{background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.55);color:var(--accent);}
+  .btn[data-exp^="pdf"]{background:rgba(239,83,80,.10);border:1px solid rgba(239,83,80,.55);color:var(--alert);}
+  .btn[data-exp^="excel"]:hover,.btn[data-exp^="csv"]:hover{background:rgba(245,158,11,.20);border-color:var(--accent);color:var(--accent);}
+  .btn[data-exp^="pdf"]:hover{background:rgba(239,83,80,.20);border-color:var(--alert);color:var(--alert);}
+  .btn[data-exp^="excel"]::before{content:"📊 ";}
+  .btn[data-exp^="csv"]::before{content:"⬇ ";}
+  .btn[data-exp^="pdf"]::before{content:"📄 ";}
+
+  /* Controles de cada gráfico (− + ↕ 🍩 📄 ⛶): botones chicos redondeados */
+  .chart-zoom-ctrl{gap:6px;}
+  .chart-zoom-ctrl button{width:28px;height:28px;line-height:26px;border-radius:8px;border-color:var(--line2);}
+  .chart-zoom-ctrl button:hover{background:rgba(245,158,11,.10);}
+
+  /* Barras: puntas redondeadas y pista más suave */
+  .bar-track,.bar-track-v{border-radius:6px;background:rgba(255,255,255,0.06);}
+  .bar-fill{border-radius:6px;}
+  .bar-fill-v{border-radius:6px 6px 0 0;}
+  :root[data-theme="light"] .bar-track,:root[data-theme="light"] .bar-track-v{background:rgba(15,27,46,0.07);}
+  .bar-row .bar-val{font-weight:600;}
+  .bar-row:hover,.bar-col:hover{background:rgba(245,158,11,.05);}
+  .donut-legend .dl-dot{border-radius:3px;}
+  .donut-legend .dl-row:hover{background:rgba(245,158,11,.06);}
+
+  /* Títulos de gráficos y KPIs locales */
+  h3{font-weight:700;letter-spacing:.3px;}
+  .local-kpi{border-left:3px solid var(--accent);}
+  .local-kpi .lk-value{letter-spacing:.2px;}
+
+  /* Chips de filtro activo */
+  .filter-chip{border-radius:999px;padding:5px 12px;}
+  .click-detail-clear{border-radius:8px;border-color:var(--line2);}
+  .click-detail-clear:hover{background:rgba(245,158,11,.10);}
+  .click-detail-panel{border-top:1px dashed var(--line2);}
+
   /* ---- Responsive: celular / tablet chica ---- */
   @media (max-width: 700px){
     header.topbar{padding:14px 14px;gap:10px;}
